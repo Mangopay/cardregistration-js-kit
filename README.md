@@ -79,7 +79,7 @@ to do the server-side work. Make sure that [MangoPay PHP SDK](https://github.com
 
 Unit Tests
 -------------------------------------------------
-Jasmine unit tests are placed under tests dir and can be launched in a browser using tests/SpecRunner.html.
+Jasmine unit tests are placed under tests dir and can be launched in a browser using tests/index.html.
 Unit test covers only validation classes and requests with invalid data.
 
 License
