@@ -1,7 +1,7 @@
 <?php
 
 // include MangoPay SDK
-require_once '../MangoPaySDK/mangoPayApi.inc';
+require_once './mangopay2-php-sdk/MangoPaySDK/mangoPayApi.inc';
 require_once './config.php';
 
 // Initialize MangoPay SDK
