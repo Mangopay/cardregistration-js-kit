@@ -1,3 +1,0 @@
-[submodule "demo/mangopay2-php-sdk"]
-	path = demo/mangopay2-php-sdk
-	url = git://github.com/MangoPay/mangopay2-php-sdk.git
