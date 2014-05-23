@@ -390,8 +390,8 @@ var mangoPay = {
             _validateCheckDigit: function(cardNumber) {
 
                 // From https://stackoverflow.com/questions/12310837/implementation-of-luhn-algorithm
-                var nCheck = 0
-                var nDigit = 0
+                var nCheck = 0;
+                var nDigit = 0;
                 var bEven = false;
 
                 var value = cardNumber.replace(/\D/g, "");
