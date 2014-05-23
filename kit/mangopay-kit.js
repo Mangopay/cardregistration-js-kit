@@ -487,7 +487,7 @@ var mangoPay = {
             // Attach success and error handlers
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == 4) {
-                    if (xmlhttp.status == 200) {
+                    if (/^2[0-9][0-9]$/.test(xmlhttp.status)) {
                         settings.success(xmlhttp.responseText);
                     } else {
                         settings.error(xmlhttp, xmlhttp.status, xmlhttp.statusText);
