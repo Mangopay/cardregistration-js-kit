@@ -8,7 +8,7 @@ Browser compatibility
 -------------------------------------------------
 The library makes cross-origin Ajax calls ([CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing))
 to get the card token and handle card registration with MangoPay API. Therefore it requires a browser that supports CORS.
-The kit does not currently work in Internet Explorer 6, 7 & 8 and Opera Mini (fix due in November 2014).
+The kit does not support Internet Explorer 6 & 7 and Opera Mini.
 
 The payment page that collects card details should use HTTPS. The kit will not work in Internet Explorer 8 and 9
 if this page is not encrypted with SSL.
