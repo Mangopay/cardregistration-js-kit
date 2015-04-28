@@ -1,7 +1,7 @@
 <?php
 
 // include MangoPay SDK
-require_once './mangopay2-php-sdk/MangoPaySDK/mangoPayApi.inc';
+require_once './mangopay2-php-sdk/MangoPay/Autoloader.php';
 require_once './config.php';
 
 // Initialize MangoPay SDK
@@ -56,8 +56,8 @@ $cardPreRegistration = $mangoPayApi->CardRegistrations->Create($cardRegister);
     <table>
         <tr><td>Card number:</td><td><input id="card_number" value="4970100000000154" /></td></tr>
         <tr><td>Card expiration date:</td><td><input id="card_expiration_date" value="1020" /></td></tr>
-        <tr><td>Card cvx:</td><td><input id="card_cvx" value="123" /></td></tr>
-        <tr><td>Card type:</td><td><select id="card_type"><option value="CB_VISA_MASTERCARD">VISA</option><option value="CB_VISA_MASTERCARD">MasterCard</option><option value="CB_VISA_MASTERCARD">CB</option><option value="AMEX">American Express</option></select></td></tr>
+        <tr><td>Card cvx:</td><td><input id="card_cvx" value="123" /> (optional for Maestro)</td></tr>
+        <tr><td>Card type:</td><td><select id="card_type"><option value="CB_VISA_MASTERCARD">CB/Visa/MasterCard</option><option value="MAESTRO">Maestro</option><option value="DINERS">Diners</option></select></td></tr>
      </table>
 </p>
 <p>
