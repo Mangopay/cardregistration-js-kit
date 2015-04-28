@@ -309,8 +309,8 @@ var mangoPay = {
                // Requires 2 digit for month and 2 digits for year
                if (cardDate.length === 4) {
 
-                   var year = parseInt(cardDate.substr(2,2)) + 2000;
-                   var month = parseInt(cardDate.substr(0,2));
+                   var year = parseInt(cardDate.substr(2,2),10) + 2000;
+                   var month = parseInt(cardDate.substr(0,2),10);
 
                    if (month > 0 && month <= 12) {
 
