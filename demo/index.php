@@ -28,6 +28,7 @@ $createdUser = $mangoPayApi->Users->Create($user);
 $cardRegister = new \MangoPay\CardRegistration();
 $cardRegister->UserId = $createdUser->Id;
 $cardRegister->Currency = "EUR";
+$cardRegister->CardType = "CB_VISA_MASTERCARD";//or alternatively MAESTRO or DINERS
 $cardPreRegistration = $mangoPayApi->CardRegistrations->Create($cardRegister);
 
 ?>
@@ -57,7 +58,6 @@ $cardPreRegistration = $mangoPayApi->CardRegistrations->Create($cardRegister);
         <tr><td>Card number:</td><td><input id="card_number" value="4970100000000154" /></td></tr>
         <tr><td>Card expiration date:</td><td><input id="card_expiration_date" value="1020" /></td></tr>
         <tr><td>Card cvx:</td><td><input id="card_cvx" value="123" /> (optional for Maestro)</td></tr>
-        <tr><td>Card type:</td><td><select id="card_type"><option value="CB_VISA_MASTERCARD">CB/Visa/MasterCard</option><option value="MAESTRO">Maestro</option><option value="DINERS">Diners</option></select></td></tr>
      </table>
 </p>
 <p>
