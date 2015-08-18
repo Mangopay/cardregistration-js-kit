@@ -266,6 +266,9 @@ var mangoPay = {
              */
             _validate: function(cvv, cardType) {
 
+               if(cardType === "MAESTRO") {
+                   return true;
+               }
                cvv = cvv ? cvv.trim() : "";
                cardType = cardType ? cardType.trim() : "";
 
@@ -303,7 +306,7 @@ var mangoPay = {
              * @param {string} cardDate Card expiration date to check
              */
             _validate: function(cardDate, currentDate) {
-
+			
                cardDate = cardDate ? cardDate.trim() : "";
 
                // Requires 2 digit for month and 2 digits for year
