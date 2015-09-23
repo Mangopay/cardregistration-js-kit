@@ -89,7 +89,7 @@ function registerCardDemo() {
          cardNumber: document.getElementById("card_number").value, 
          cardExpirationDate: document.getElementById("card_expiration_date").value, 
          cardCvx: document.getElementById("card_cvx").value,
-         cardType: document.getElementById("card_type").value
+         cardType: "<?php echo $cardRegister->CardType; ?>"
     };
 
     // Set MangoPay API base URL and Client ID
