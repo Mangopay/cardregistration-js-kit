@@ -16,7 +16,6 @@ $user = new MangoPay\UserNatural();
 $user->FirstName = 'John';
 $user->LastName = 'Smith';
 $user->Email = 'email@domain.com';
-$user->Address = "Some Address";
 $user->Birthday = time();
 $user->Nationality = 'FR';
 $user->CountryOfResidence = 'FR';
