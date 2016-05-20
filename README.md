@@ -1,13 +1,13 @@
-MangoPay CardRegistration JavaScript Kit
+MANGOPAY CardRegistration JavaScript Kit
 =================================================
-MangoPay CardRegistration JavaScript Kit is a client library designed to take care of the card registration process.
-Refer to [MangoPay REST API documentation](http://docs.mangopay.com/api-references/) and 
-[MangoPay card registration process](http://docs.mangopay.com/api-references/card-registration/) for more information.
+MANGOPAY CardRegistration JavaScript Kit is a client library designed to take care of the card registration process.
+Refer to [MANGOPAY REST API documentation](http://docs.mangopay.com/api-references/) and 
+[MANGOPAY card registration process](http://docs.mangopay.com/api-references/card-registration/) for more information.
 
 Browser compatibility
 -------------------------------------------------
 The library makes cross-origin Ajax calls ([CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing))
-to get the card token and handle card registration with MangoPay API. Therefore it requires a browser that supports CORS.
+to get the card token and handle card registration with MANGOPAY API. Therefore it requires a browser that supports CORS.
 The kit does not support Internet Explorer 6 & 7 and Opera Mini.
 
 The payment page that collects card details should use HTTPS. The kit will not work in Internet Explorer 8 and 9
@@ -20,20 +20,20 @@ on your card payment page:
 
     <script type="text/javascript" src="mangopay-kit.js"></script>
 
-Typically you would also have MangoPay SDK up and running to work with the MangoPay API. 
-[Java](https://github.com/MangoPay/mangopay2-java-sdk), [PHP](https://github.com/MangoPay/mangopay2-php-sdk), [.NET](https://github.com/MangoPay/mangopay2-net-sdk), [Python](https://github.com/MangoPay/mangopay2-python-sdk) and [Ruby](https://github.com/MangoPay/mangopay2-ruby-sdk) 
+Typically you would also have MANGOPAY SDK up and running to work with the MANGOPAY API. 
+[Java](https://github.com/Mangopay/mangopay2-java-sdk), [PHP](https://github.com/MangoPay/mangopay2-php-sdk), [.NET](https://github.com/Mangopay/mangopay2-net-sdk), [Python](https://github.com/MangoPay/mangopay2-python-sdk) and [Ruby](https://github.com/Mangopay/mangopay2-ruby-sdk) 
 distributions are available.
 
 Configuration
 -------------------------------------------------
-Set `mangoPay.cardRegistration.clientId` to your MangoPay Client ID. `mangoPay.cardRegistration.baseURL` is set to 
+Set `mangoPay.cardRegistration.clientId` to your MANGOPAY Client ID. `mangoPay.cardRegistration.baseURL` is set to 
 sandbox environment by default. To enable production environment, set it to `https://api.mangopay.com`.
 
 Usage
 -------------------------------------------------
 Make sure you have the right configuration in place:
 
-    // Set MangoPay API base URL and Client ID
+    // Set MANGOPAY API base URL and Client ID
     mangoPay.cardRegistration.baseURL = "https://api.sandbox.mangopay.com";
     mangoPay.cardRegistration.clientId = {your-client-id};
 
@@ -73,8 +73,8 @@ Then call `mangoPay.cardRegistration.registerCard`:
 
 Running the demo
 -------------------------------------------------
-There is a simple PHP demo code included that shows how to use the kit. The demo page requires MangoPaySDK class 
-to do the server-side work. Make sure that [MangoPay PHP SDK](https://github.com/MangoPay/mangopay2-php-sdk) is accessible to the demo page.
+There is a simple PHP demo code included that shows how to use the kit. The demo page requires MANGOPAY SDK class 
+to do the server-side work. Make sure that [MANGOPAY PHP SDK](https://github.com/MangoPay/mangopay2-php-sdk) is accessible to the demo page.
 
 Unit Tests
 -------------------------------------------------
@@ -83,7 +83,7 @@ Unit test covers only validation classes and requests with invalid data.
 
 License
 -------------------------------------------------
-MangoPay JavaScript Kit is distributed under MIT license.
+MANGOPAY JavaScript Kit is distributed under MIT license.
 
 Contacts
 -------------------------------------------------
