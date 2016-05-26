@@ -153,7 +153,8 @@ var mangoPay = {
                 },
 
                 // Invoke error callback
-                error: function(xmlhttp) {
+                error: function(xmlhttp, result) {
+                    if (result) return errorCallback(result);
                     errorCallback({
                         "ResultCode": "001599", 
                         "ResultMessage": "Token processing error"
@@ -215,7 +216,9 @@ var mangoPay = {
                 },
 
                 // Forward error to user supplied callback
-                error: function(xmlhttp) {
+                error: function(xmlhttp, result) {
+
+                    if (result) return errorCallback(result);
 
                     var message = "CardRegistration error";
 
@@ -473,6 +476,21 @@ var mangoPay = {
                 url = settings.url + (settings.url.indexOf("?") > -1 ? '&' : '?') + parameters;
             }
 
+            function _on_exception(req, exc) {
+                var code, msg;
+                if (settings.crossDomain)
+                    code = "CORS_FAIL";
+                    msg = "A cross-origin HTTP request failed";
+                else {
+                    code = "XHR_FAIL";
+                    msg = "An HTTP request failed";
+                }
+                if (exc && exc.message.length) {
+                    msg = msg + ': ' + exc.message;
+                }
+                settings.error(req, {ResultCode: code, ResultMessage: msg});
+            }
+
             // Cross-domain requests in IE 7, 8 and 9 using XDomainRequest
             if (settings.crossDomain && !("withCredentials" in xmlhttp) && window.XDomainRequest) {
                 xdr = new XDomainRequest();
@@ -482,8 +500,12 @@ var mangoPay = {
                 xdr.onload = function() {
                     settings.success(xdr.responseText);
                 };
-                xdr.open(settings.type, url);
-                xdr.send(settings.type === "post" ? parameters : null);
+                try {
+                    xdr.open(settings.type, url);
+                    xdr.send(settings.type === "post" ? parameters : null);
+                } catch (e) {
+                    return _on_exception(xdr, e);
+                }
                 return;
             }
 
@@ -499,7 +521,11 @@ var mangoPay = {
             };
 
             // Open connection
-            xmlhttp.open(settings.type, url, true);
+            try {
+                xmlhttp.open(settings.type, url, true);
+            } catch (e) {
+                return _on_exception(xmlhttp, e);
+            }
 
             // Send extra header for POST request
             if (settings.type === "post") {
@@ -507,7 +533,11 @@ var mangoPay = {
             }
 
             // Send data
-            xmlhttp.send(settings.type === "post" ? parameters : null);
+            try {
+                xmlhttp.send(settings.type === "post" ? parameters : null);
+            } catch (e) {
+                return _on_exception(xmlhttp, e);
+            }
 
         },
 
