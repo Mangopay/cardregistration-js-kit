@@ -490,10 +490,10 @@ var mangoPay = {
             function _on_exception(req, exc) {
                 var code, msg;
                 if (settings.crossDomain)
-                    code = "CORS_FAIL";
+                    code = "001598";
                     msg = "A cross-origin HTTP request failed";
                 else {
-                    code = "XHR_FAIL";
+                    code = "001597";
                     msg = "An HTTP request failed";
                 }
                 if (exc && exc.message.length) {
