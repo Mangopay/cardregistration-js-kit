@@ -1,3 +1,10 @@
+(function (global, factory) {
+typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+typeof define === 'function' && define.amd ? define(factory) :
+global.mangoPay = factory()
+}(this, function () {
+'use strict';
+
 var mangoPay = {
 
 
@@ -587,4 +594,8 @@ if(! String.prototype.trim){
         return this.replace(/^\s+|\s+$/g,'');  
     };
 }
+
+
+return mangoPay;
+}));
 

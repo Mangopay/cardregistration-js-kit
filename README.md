@@ -24,6 +24,8 @@ Typically you would also have MANGOPAY SDK up and running to work with the MANGO
 [Java](https://github.com/Mangopay/mangopay2-java-sdk), [PHP](https://github.com/MangoPay/mangopay2-php-sdk), [.NET](https://github.com/Mangopay/mangopay2-net-sdk), [Python](https://github.com/MangoPay/mangopay2-python-sdk) and [Ruby](https://github.com/Mangopay/mangopay2-ruby-sdk) 
 distributions are available.
 
+The kit is also available for installation from [npm](https://www.npmjs.com/package/mangopay-cardregistration-js-kit) if you prefer.
+
 Configuration
 -------------------------------------------------
 Set `mangoPay.cardRegistration.clientId` to your MANGOPAY Client ID. `mangoPay.cardRegistration.baseURL` is set to 
