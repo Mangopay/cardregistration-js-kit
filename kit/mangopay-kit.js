@@ -489,10 +489,10 @@ var mangoPay = {
 
             function _on_exception(req, exc) {
                 var code, msg;
-                if (settings.crossDomain)
+                if (settings.crossDomain) {
                     code = "001598";
                     msg = "A cross-origin HTTP request failed";
-                else {
+                } else {
                     code = "001597";
                     msg = "An HTTP request failed";
                 }
