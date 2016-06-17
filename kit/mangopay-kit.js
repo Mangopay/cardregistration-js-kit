@@ -195,7 +195,7 @@ var mangoPay = {
                 crossDomain: true,
 
                 // URL to MangoPay API CardRegistration resource
-                url: mangoPay.cardRegistration.baseURL + '/v2/' + mangoPay.cardRegistration.clientId + '/CardRegistrations/' + paylineData.Id,
+                url: mangoPay.cardRegistration.baseURL + '/v2.01/' + mangoPay.cardRegistration.clientId + '/CardRegistrations/' + paylineData.Id,
 
                 // Payline card registration data along CardRegistration resource id
                 data: paylineData,
