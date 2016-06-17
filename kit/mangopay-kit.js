@@ -135,13 +135,14 @@ var mangoPay = {
                 },
 
                 // Forward response to the return URL
-                success: function(data) {
+                success: function(data, xmlhttp) {
 
                     var dataToSend = "";
 
                     // Something wrong, no data came back from Payline
                     if (data === null) {
                         errorCallback({
+                            "xmlhttp": xmlhttp,
                             "ResultCode": "001599", 
                             "ResultMessage": "Token processing error"
                         });
@@ -160,8 +161,10 @@ var mangoPay = {
                 },
 
                 // Invoke error callback
-                error: function(xmlhttp) {
+                error: function(xmlhttp, result) {
+                    if (result) return errorCallback(result);
                     errorCallback({
+                        "xmlhttp": xmlhttp,
                         "ResultCode": "001599", 
                         "ResultMessage": "Token processing error"
                     });
@@ -198,7 +201,7 @@ var mangoPay = {
                 data: paylineData,
 
                 // Invoke the user supplied success or error handler here
-                success: function(data) {
+                success: function(data, xmlhttp) {
 
                     // Parse API reponse
                     try {
@@ -206,6 +209,7 @@ var mangoPay = {
                     }
                     catch(err) {
                         errorCallback({
+                            "xmlhttp": xmlhttp,
                             "ResultCode": "101699",
                             "ResultMessage": "CardRegistration should return a valid JSON response"
                         });
@@ -222,7 +226,9 @@ var mangoPay = {
                 },
 
                 // Forward error to user supplied callback
-                error: function(xmlhttp) {
+                error: function(xmlhttp, result) {
+
+                    if (result) return errorCallback(result);
 
                     var message = "CardRegistration error";
 
@@ -239,6 +245,7 @@ var mangoPay = {
 
                     // Invoke user supplied error callback
                     errorCallback({
+                        "xmlhttp": xmlhttp,
                         "ResultCode": "101699", 
                         "ResultMessage": message
                     });
@@ -480,6 +487,21 @@ var mangoPay = {
                 url = settings.url + (settings.url.indexOf("?") > -1 ? '&' : '?') + parameters;
             }
 
+            function _on_exception(req, exc) {
+                var code, msg;
+                if (settings.crossDomain) {
+                    code = "001598";
+                    msg = "A cross-origin HTTP request failed";
+                } else {
+                    code = "001597";
+                    msg = "An HTTP request failed";
+                }
+                if (exc && exc.message.length) {
+                    msg = msg + ': ' + exc.message;
+                }
+                settings.error(req, {ResultCode: code, ResultMessage: msg, xmlhttp: req});
+            }
+
             // Cross-domain requests in IE 7, 8 and 9 using XDomainRequest
             if (settings.crossDomain && !("withCredentials" in xmlhttp) && window.XDomainRequest) {
                 xdr = new XDomainRequest();
@@ -487,10 +509,14 @@ var mangoPay = {
                     settings.error(xdr);
                 };
                 xdr.onload = function() {
-                    settings.success(xdr.responseText);
+                    settings.success(xdr.responseText, xdr);
                 };
-                xdr.open(settings.type, url);
-                xdr.send(settings.type === "post" ? parameters : null);
+                try {
+                    xdr.open(settings.type, url);
+                    xdr.send(settings.type === "post" ? parameters : null);
+                } catch (e) {
+                    return _on_exception(xdr, e);
+                }
                 return;
             }
 
@@ -498,7 +524,7 @@ var mangoPay = {
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == 4) {
                     if (/^2[0-9][0-9]$/.test(xmlhttp.status)) {
-                        settings.success(xmlhttp.responseText);
+                        settings.success(xmlhttp.responseText, xmlhttp);
                     } else {
                         settings.error(xmlhttp, xmlhttp.status, xmlhttp.statusText);
                     }
@@ -506,7 +532,11 @@ var mangoPay = {
             };
 
             // Open connection
-            xmlhttp.open(settings.type, url, true);
+            try {
+                xmlhttp.open(settings.type, url, true);
+            } catch (e) {
+                return _on_exception(xmlhttp, e);
+            }
 
             // Send extra header for POST request
             if (settings.type === "post") {
@@ -514,7 +544,11 @@ var mangoPay = {
             }
 
             // Send data
-            xmlhttp.send(settings.type === "post" ? parameters : null);
+            try {
+                xmlhttp.send(settings.type === "post" ? parameters : null);
+            } catch (e) {
+                return _on_exception(xmlhttp, e);
+            }
 
         },
 
