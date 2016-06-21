@@ -1,6 +1,6 @@
 {
   "name": "mangopay-cardregistration-js-kit",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MANGOPAY Card Registration JavaScript Kit is a client library designed to take care of the card registration process.",
   "main": "kit/mangopay-kit.min.js",
   "directories": {
@@ -30,4 +30,3 @@
   },
   "homepage": "https://github.com/Mangopay/cardregistration-js-kit#readme"
 }
-
