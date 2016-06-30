@@ -280,7 +280,7 @@ var mangoPay = {
              */
             _validate: function(cvv, cardType) {
 
-               if(cardType === "MAESTRO") {
+               if(cardType === "MAESTRO" || cardType === "BCMC") {
                    return true;
                }
                cvv = cvv ? cvv.trim() : "";
