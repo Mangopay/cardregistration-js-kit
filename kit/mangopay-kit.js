@@ -162,7 +162,18 @@ var mangoPay = {
 
                 // Invoke error callback
                 error: function(xmlhttp, result) {
+                	
                     if (result) return errorCallback(result);
+
+                    if (xmlhttp.status=="0") {//in a browser its shown as 499, however the antivirus blocks the call even before it's able to do the PL request
+                    	 errorCallback({
+	                        "xmlhttp": xmlhttp,
+	                        "ResultCode": "001596", 
+	                        "ResultMessage": "An HTTP request was blocked by the User's antivirus"
+	                    });
+	                    return;
+                    }
+                    
                     errorCallback({
                         "xmlhttp": xmlhttp,
                         "ResultCode": "001599", 
@@ -598,4 +609,3 @@ if(! String.prototype.trim){
 
 return mangoPay;
 }));
-
