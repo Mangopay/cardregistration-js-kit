@@ -140,14 +140,21 @@ var mangoPay = {
                     var dataToSend = "";
 
                     // Something wrong, no data came back from Payline
-                    if (data === null) {
-                        errorCallback({
-                            "xmlhttp": xmlhttp,
-                            "ResultCode": "001599", 
-                            "ResultMessage": "Token processing error"
-                        });
-                        return;
-                    }
+                    if (data !== null && data.indexOf("errorCode=") === 0) {
+					    errorCallback({
+					        "xmlhttp": xmlhttp,
+					        "ResultCode": data.replace("errorCode=", ""), 
+					        "ResultMessage": "Token processing error"
+					    });
+					    return;
+					} else if(data === null) {
+					    errorCallback({
+					        "xmlhttp": xmlhttp,
+					        "ResultCode": "001599", 
+					        "ResultMessage": "Token processing error"
+					    });
+					    return;
+					}
 
                     // Prepare data to send in the second step
                     dataToSend = {
