@@ -584,7 +584,12 @@ var mangoPay = {
          * Returns true if browser is capable of making cross-origin Ajax calls
          */
         corsSupport: function() {
-
+			
+			// Test if runtime is React Native
+    		if (window.navigator.product === 'ReactNative') {
+        		return true;
+    		}
+    
             // IE 10 and above, Firefox, Chrome, Opera etc.
             if ("withCredentials" in new XMLHttpRequest()) {
                 return true;
