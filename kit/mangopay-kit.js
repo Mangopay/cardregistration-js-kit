@@ -172,11 +172,11 @@ var mangoPay = {
                 	
                     if (result) return errorCallback(result);
 
-                    if (xmlhttp.status=="0") {//in a browser its shown as 499, however the antivirus blocks the call even before it's able to do the PL request
+                    if (xmlhttp.status=="0") {//in a browser its shown as 499, however the client computer blocks the call even before it's able to do the Payline request (most likely due to an antivirus)
                     	 errorCallback({
 	                        "xmlhttp": xmlhttp,
 	                        "ResultCode": "001596", 
-	                        "ResultMessage": "An HTTP request was blocked by the User's antivirus"
+	                        "ResultMessage": "An HTTP request was blocked by the User's computer (probably due to an antivirus)"
 	                    });
 	                    return;
                     }
