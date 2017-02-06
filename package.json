@@ -12,7 +12,7 @@
     "kit"
   ],
   "scripts": {
-    "test": "node -e \"console.log('Open in your browser ./tests/index.html')\""
+    "test": "phantomjs run-jasmine.js tests/index.html"
   },
   "repository": {
     "type": "git",
