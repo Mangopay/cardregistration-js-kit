@@ -1,4 +1,4 @@
-MANGOPAY CardRegistration JavaScript Kit
+MANGOPAY Card Registration JavaScript Kit  [![Build Status](https://travis-ci.org/Mangopay/cardregistration-js-kit.svg?branch=master)](https://travis-ci.org/Mangopay/cardregistration-js-kit)
 =================================================
 MANGOPAY CardRegistration JavaScript Kit is a client library designed to take care of the card registration process.
 Refer to [MANGOPAY REST API documentation](http://docs.mangopay.com/api-references/) and 
