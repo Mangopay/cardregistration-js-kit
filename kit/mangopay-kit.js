@@ -544,7 +544,7 @@ var mangoPay = {
                     if (/^2[0-9][0-9]$/.test(xmlhttp.status)) {
                         settings.success(xmlhttp.responseText, xmlhttp);
                     } else {
-                        settings.error(xmlhttp, xmlhttp.status, xmlhttp.statusText);
+                        settings.error(xmlhttp);
                     }
                 }
             };
