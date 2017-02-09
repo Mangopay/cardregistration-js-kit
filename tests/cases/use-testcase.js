@@ -55,7 +55,7 @@ describe("Kit should ", function () {
             return flag;
         }, "async operation should finish", 5000);
         runs(function() {
-            expect(res.ResultCode === "101699").toBeTruthy();
+        	expect(res.ResultCode === "09101").toBeTruthy();
         });
     });
     
