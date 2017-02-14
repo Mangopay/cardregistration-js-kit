@@ -1,7 +1,13 @@
 language: node_js
+
 node_js:
   - "4"
+
 script: npm test
+
+before_script:
+    - npm install -g npm@'>=3'
+
 deploy:
   provider: npm
   email: 'support@mangopay.com'
