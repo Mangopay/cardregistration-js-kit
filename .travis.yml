@@ -1,18 +1,7 @@
 language: node_js
 
-sudo: false
-
 node_js:
   - 4
-
-install:
-- npm cache clean
-- npm install -g npm@latest
-- npm update
-- npm install
-
-before_script:
-- export PATH=$HOME/.local/bin:$PATH
 
 script: npm test
 
@@ -22,6 +11,6 @@ deploy:
   api_key:
     secure: $NPM_TOKEN
   on:
-    tags: false
+    tags: true
     branch: travis
     repo: Mangopay/cardregistration-js-kit
