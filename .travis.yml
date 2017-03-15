@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - 4
+  - 6
 
 script: npm test
 
@@ -11,6 +11,6 @@ deploy:
   api_key:
     secure: $NPM_TOKEN
   on:
-    tags: true
+    tags: false
     branch: travis
     repo: Mangopay/cardregistration-js-kit
