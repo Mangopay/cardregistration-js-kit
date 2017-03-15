@@ -13,6 +13,6 @@ deploy:
   api_key:
     secure: $NPM_TOKEN
   on:
-    tags: false
+    tags: true
     branch: travis
     repo: Mangopay/cardregistration-js-kit
