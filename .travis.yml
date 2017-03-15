@@ -9,4 +9,4 @@ deploy:
     secure: $NPM_TOKEN
   on:
     repo: Mangopay/cardregistration-js-kit
-    branch: travis
+    branch: release
