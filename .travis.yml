@@ -4,11 +4,9 @@ sudo: false
 
 node_js:
   - 4
+  - 0.10
 
 script: npm test
-
-before_install:
-  - "npm install -g npm@latest"
 
 deploy:
   provider: npm
