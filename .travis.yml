@@ -11,6 +11,11 @@ install:
 - npm update
 - npm install
 
+before_script:
+- bundle install --gemfile=test/clients/ruby/Gemfile
+- export PATH=$HOME/.local/bin:$PATH
+- pip install requests-oauth --user `whoami`
+
 script: npm test
 
 deploy:
