@@ -1,7 +1,9 @@
 language: node_js
 
+sudo: false
+
 node_js:
-  - "6"
+  - stable
 
 script: npm test
 
@@ -11,7 +13,9 @@ before_install:
 deploy:
   provider: npm
   email: support@mangopay.com
-  api_key: $NPM_TOKEN
+  api_key:
+    secure: $NPM_TOKEN
   on:
     tags: false
     branch: travis
+    repo: Mangopay/cardregistration-js-kit
