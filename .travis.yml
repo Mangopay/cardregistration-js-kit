@@ -5,6 +5,9 @@ node_js:
 
 script: npm test
 
+before_install:
+  - "npm install -g npm@latest"
+
 deploy:
   provider: npm
   email: support@mangopay.com
