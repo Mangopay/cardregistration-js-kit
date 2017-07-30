@@ -7,12 +7,10 @@ global.mangoPay = factory()
 
 var mangoPay = {
 
-
     /**
      * Handles card registration process
      */
     cardRegistration: {
-
 
         /**
          * MangoPay API base URL. The default value uses sandbox envronment.
@@ -21,7 +19,6 @@ var mangoPay = {
          */
         baseURL: "https://api.sandbox.mangopay.com",
 
-
         /**
          * MangoPay Client ID to use with the MangoPay API
          *
@@ -29,16 +26,13 @@ var mangoPay = {
          */
         clientId : "",
 
-
         /**
          * Initialize card registration object
          * 
          * @param {object} cardRegisterData Card pre-registration data {Id, cardRegistrationURL, preregistrationData, accessKey}
          */
         init: function(cardRegisterData) {
-
             this._cardRegisterData = cardRegisterData;
-
         },
 
 
@@ -102,7 +96,6 @@ var mangoPay = {
 
         },
 
-
         /**
          * PRIVATE. Gets Payline token for the card
          *
@@ -137,8 +130,6 @@ var mangoPay = {
                 // Forward response to the return URL
                 success: function(data, xmlhttp) {
 
-                    var dataToSend = "";
-
                     // Something wrong, no data came back from Payline
                     if (data !== null && data.indexOf("errorCode=") === 0) {
 					    errorCallback({
@@ -157,11 +148,10 @@ var mangoPay = {
 					}
 
                     // Prepare data to send in the second step
-                    dataToSend = {
+                    var dataToSend = {
                         Id: mangoPay.cardRegistration._cardRegisterData.Id,
                         RegistrationData: data
                     };
-
                     // Complete card regisration with MangoPay API
                     resultCallback(dataToSend, successCallback, errorCallback);
 
@@ -188,11 +178,8 @@ var mangoPay = {
                     });
                     return;
                 }
-
             });
-
         },
-
 
         /**
          * PRIVATE. Finishes card registration using the encrypted Payline token data
@@ -245,17 +232,16 @@ var mangoPay = {
 
                 // Forward error to user supplied callback
                 error: function(xmlhttp, result) {
-
                     if (result) return errorCallback(result);
 
                     var message = "CardRegistration error";
-
                     // Try to get API error message
                     if (xmlhttp.response) {
                         try {
                             var responseParsed = JSON.parse(xmlhttp.response);
                             if (responseParsed.Message) {
-                                message = responseParsed.Message;
+                                message = responseParsed.Message + ", "
+                                    + responseParsed.errors[Object.keys(responseParsed.errors)[0]];
                             }
                         }
                         catch(err) {}
@@ -267,28 +253,19 @@ var mangoPay = {
                         "ResultCode": "101699", 
                         "ResultMessage": message
                     });
-
                 }
-
             });
-
         }
-
-
     },
-
 
     /**
      * PRIVATE. Includes various validation code (private)
      */
     _validation: {
-
-
         /**
          * PRIVATE. Card CVx validation
          */
         _cvvValidator: {
-
 
             /**
              * PRIVATE. Validates CVV code
@@ -306,31 +283,23 @@ var mangoPay = {
 
                // CVV is 3 to 4 digits for AMEX cards and 3 digits for all other cards
                if (mangoPay._validation._helpers._validateNumericOnly(cvv) === true) {
-                    if (cardType === "AMEX" && (cvv.length === 3 || cvv.length === 4)) {
-                        return true;
-                    }
-                    if (cardType === "CB_VISA_MASTERCARD" && cvv.length === 3) {
+                    if ((cardType === "AMEX" && (cvv.length === 3 || cvv.length === 4))
+                    || (cardType === "CB_VISA_MASTERCARD" && cvv.length === 3)) {
                         return true;
                     }
                }
-
                // Invalid format
                return {
                    "ResultCode": "105204",
                    "ResultMessage": "CVV_FORMAT_ERROR"
                };
-
             }
-
-
         },
-
 
         /**
          * PRIVATE. Card expiration validation
          */
         _expirationDateValidator: {
-
 
             /**
              * PRIVATE. Validates date code in mmyy format
@@ -365,7 +334,6 @@ var mangoPay = {
                            "ResultCode": "105203",
                            "ResultMessage": "PAST_EXPIRY_DATE_ERROR"
                        };
-
                     }
                }
 
@@ -375,16 +343,12 @@ var mangoPay = {
                    "ResultMessage": "EXPIRY_DATE_FORMAT_ERROR"
                };
             }
-
-
         },
-
 
         /**
          * PRIVATE. Card number validation
          */
         _cardNumberValidator: {
-
 
             /**
              * PRIVATE. Validates card number
@@ -392,31 +356,15 @@ var mangoPay = {
              * @param {string} cardNumber Card number to check
              */
             _validate: function(cardNumber) {
-
-               cardNumber = cardNumber ? cardNumber.trim() : "";
-
-               // Check for numbers only
-               if (mangoPay._validation._helpers._validateNumericOnly(cardNumber) === false) {
-                   return {
-                       "ResultCode": "105202",
-                       "ResultMessage": "CARD_NUMBER_FORMAT_ERROR"
-                   };
-               }
-
-               // Compute and validate check digit
-               if (this._validateCheckDigit(cardNumber) === false) {
-                   return {
-                       "ResultCode": "105202",
-                       "ResultMessage": "CARD_NUMBER_FORMAT_ERROR"
-                   };
-               }
-
-               // Number seems ok
-               return true;
-
+                cardNumber = cardNumber ? cardNumber.trim() : "";
+                return mangoPay._validation._helpers._validateNumericOnly(cardNumber) === false
+                    || this._validateCheckDigit(cardNumber) === false ?
+                    {
+                        "ResultCode": "105202",
+                        "ResultMessage": "CARD_NUMBER_FORMAT_ERROR"
+                    } : true;
             },
-
-
+            
             /**
              * PRIVATE. Validates card number check digit
              *
@@ -425,11 +373,9 @@ var mangoPay = {
             _validateCheckDigit: function(cardNumber) {
 
                 // From https://stackoverflow.com/questions/12310837/implementation-of-luhn-algorithm
-                var nCheck = 0;
-                var nDigit = 0;
-                var bEven = false;
-
-                var value = cardNumber.replace(/\D/g, "");
+                var nCheck = 0,
+                    bEven = false,
+                    value = cardNumber.replace(/\D/g, "");
 
                 for (var n = value.length - 1; n >= 0; n--) {
                     var cDigit = value.charAt(n),
@@ -442,47 +388,27 @@ var mangoPay = {
                 }
 
                 return (nCheck % 10) === 0;
-
-            },
-
+            }
         },
-
 
         /**
          * PRIVATE. Validation helpers
          */
         _helpers: {
-
-
             /**
              * PRIVATE. Validates if given string contain only numbers
              * @param {string} input numeric string to check
              */
             _validateNumericOnly: function(input) {
-
-                var numbers = /^[0-9]+$/;
-
-                if(input.match(numbers)) {
-                    return true;  
-                }
-
-                return false;
-
+                return input.match(/^[0-9]+$/) ? true : false;
             }
-
-
         }
-
-
     },
-
 
     /**
      * PRIVATE. Networking stuff
      */
     _networking: {
-
-
         /**
          * PRIVATE. Performs an asynchronous HTTP (Ajax) request
          *
@@ -492,7 +418,6 @@ var mangoPay = {
 
             // XMLHttpRequest object
             var xmlhttp = new XMLHttpRequest();
-
             // Put together input data as string
             var parameters = "";
             for (var key in settings.data) {
@@ -522,7 +447,7 @@ var mangoPay = {
 
             // Cross-domain requests in IE 7, 8 and 9 using XDomainRequest
             if (settings.crossDomain && !("withCredentials" in xmlhttp) && window.XDomainRequest) {
-                xdr = new XDomainRequest();
+                var xdr = new XDomainRequest();
                 xdr.onerror = function() {
                     settings.error(xdr);
                 };
@@ -567,47 +492,25 @@ var mangoPay = {
             } catch (e) {
                 return _on_exception(xmlhttp, e);
             }
-
-        },
-
-
+        }
     },
-
 
     /**
      * Browser support querying
      */
     browser: {
-
-
         /**
          * Returns true if browser is capable of making cross-origin Ajax calls
          */
         corsSupport: function() {
-			
-			// Test if runtime is React Native
-    		if (window.navigator.product === 'ReactNative') {
-        		return true;
-    		}
-    
-            // IE 10 and above, Firefox, Chrome, Opera etc.
-            if ("withCredentials" in new XMLHttpRequest()) {
-                return true;
-            }
-
-            // IE 8 and IE 9
-            if (window.XDomainRequest) {
-                return true;
-            }
-
-            return false;
-
+            // Test if runtime is React Native
+            return window.navigator.product === 'ReactNative' ? true :
+                // IE 10 and above, Firefox, Chrome, Opera etc.
+                "withCredentials" in new XMLHttpRequest() ? true :
+                    // IE 8 and IE 9
+                    !!window.XDomainRequest;
         }
-
-
     }
-
-
 };
 
 
