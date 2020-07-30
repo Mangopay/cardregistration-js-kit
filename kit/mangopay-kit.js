@@ -284,7 +284,8 @@ var mangoPay = {
                // CVV is 3 to 4 digits for AMEX cards and 3 digits for all other cards
                if (mangoPay._validation._helpers._validateNumericOnly(cvv) === true) {
                     if ((cardType === "AMEX" && (cvv.length === 3 || cvv.length === 4))
-                    || (cardType === "CB_VISA_MASTERCARD" && cvv.length === 3)) {
+                    || (cardType === "CB_VISA_MASTERCARD" && cvv.length === 3)
+		    		 || (cardType === "DINERS" && cvv.length === 3)) {
                         return true;
                     }
                }
