@@ -21,7 +21,7 @@ on your card payment page:
     <script type="text/javascript" src="mangopay-kit.js"></script>
 
 Typically you would also have MANGOPAY SDK up and running to work with the MANGOPAY API. 
-[Java](https://github.com/Mangopay/mangopay2-java-sdk), [PHP](https://github.com/MangoPay/mangopay2-php-sdk), [.NET](https://github.com/Mangopay/mangopay2-net-sdk), [Python](https://github.com/MangoPay/mangopay2-python-sdk) and [Ruby](https://github.com/Mangopay/mangopay2-ruby-sdk) 
+[Java](https://github.com/Mangopay/mangopay2-java-sdk), [PHP](https://github.com/MangoPay/mangopay2-php-sdk), [.NET](https://github.com/Mangopay/mangopay2-net-sdk), [Python](https://github.com/MangoPay/mangopay2-python-sdk), [Ruby](https://github.com/Mangopay/mangopay2-ruby-sdk) and [Node](https://github.com/Mangopay/mangopay2-nodejs-sdk) 
 distributions are available.
 
 The kit is also available for installation from [npm](https://www.npmjs.com/package/mangopay-cardregistration-js-kit) if you prefer.
