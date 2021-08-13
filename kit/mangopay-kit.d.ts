@@ -34,9 +34,9 @@ declare module "mangopay-cardregistration-js-kit" {
     Currency: string;
     AccessKey: string;
     CreationDate: number;
-    ResultCode: null;
-    ResultMessage: null;
-    RegistrationData: null;
+    ResultCode: null | string;
+    ResultMessage: null | string;
+    RegistrationData: null | string;
     CardRegistrationURL: string;
     PreregistrationData: string;
   };
