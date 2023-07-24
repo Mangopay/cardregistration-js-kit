@@ -1,10 +1,8 @@
-# :warning: Deprecated
+# :warning: Deprecated :warning:
 
 This SDK is deprecated as of July 21, 2023 and will no longer be maintained or supported.
 
-We recommend upgrading to our new [Javascript Vault SDK](https://www.npmjs.com/package/@mangopay/vault-sdk) instead. The new SDK provides the same functionality of [card registration flow](https://mangopay.com/docs/endpoints/direct-card-payins#card-registration-object), with Typescript language support., better performance, and continued support.
-
-For details on upgrading from this SDK to the new SDK, please visit our [Vault SDK integration guide](https://mangopay.com/docs/sdk/vault-web).
+>**You should upgrade to the newest version of our [Javascript Vault SDK](https://mangopay.com/docs/sdk/vault-web). The new SDK provides the same functionality of [card registration flow](https://mangopay.com/docs/endpoints/direct-card-payins#card-registration-object), with Typescript language support., better performance, and continued support.**
 
 If you have any other questions around this deprecation, please reach out to our team via the [Hub](https://hub.mangopay.com/)
 
